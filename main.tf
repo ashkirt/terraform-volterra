@@ -4,12 +4,9 @@ terraform {
           required_providers {
             volterra = {
               source = "volterraedge/volterra"
-              version = ">=0.0.6"
+              version = ">=0.10.0"
             }
           }
         }
         provider "volterra" {
-          api_cert = var.api_cert
-          api_key = var.api_key
-          url   = var.api_url
         }
