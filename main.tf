@@ -9,6 +9,6 @@ terraform {
           }
         }
         provider "volterra" {
-          api_p12_file = "f5cs-soc.console.ves.volterra.io.api-creds.p12"
-          url = "https://f5cs-soc.console.ves.volterra.io/api"
+          api_p12_file = base64decode(var.VES_p12_certificate_content)
+          url = var.VES_tenant_url
         }
