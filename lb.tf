@@ -35,11 +35,9 @@ resource "volterra_app_firewall" "asingla-waap-new" {
   // One of the arguments from this list "use_default_blocking_page blocking_page" must be set
   use_default_blocking_page = true
   // One of the arguments from this list "default_bot_setting bot_protection_setting" must be set
-  default_bot_setting = true
   // One of the arguments from this list "default_detection_settings detection_settings" must be set
   default_detection_settings = true
   // One of the arguments from this list "use_loadbalancer_setting blocking monitoring" must be set
-  use_loadbalancer_setting = true
   // Blocking mode - optional - if not set, policy is in MONITORING
   blocking = true
 }
