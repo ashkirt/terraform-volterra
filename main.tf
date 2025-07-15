@@ -9,4 +9,6 @@ terraform {
           }
         }
         provider "volterra" {
+          api_p12_file = "f5cs-soc.console.ves.volterra.io.api-creds.p12"
+          url = "https://f5cs-soc.console.ves.volterra.io/api"
         }
