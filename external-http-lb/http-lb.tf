@@ -4,7 +4,7 @@
 resource "volterra_origin_pool" "asingla-test-pool" {
   name                   = "asingla-test-pool"
   //Name of the namespace where the origin pool must be deployed
-  namespace              = "shape-cs"
+  namespace              = "asingla"
   origin_servers {
 
     public_ip {
@@ -26,7 +26,7 @@ resource "volterra_origin_pool" "asingla-test-pool" {
 //Definition of the WAAP Policy
 resource "volterra_app_firewall" "asingla-waap-new" {
   name      = "asingla-waap-new"
-  namespace = "shape-cs"
+  namespace = "asingla"
 
   // One of the arguments from this list "allow_all_response_codes allowed_response_codes" must be set
   allow_all_response_codes = true
@@ -44,71 +44,6 @@ resource "volterra_app_firewall" "asingla-waap-new" {
   blocking = true
 }
 
-//==========================================================================
-//Definition of the Load-Balancer
-//Start of the TF file
-resource "volterra_http_loadbalancer" "asingla-http-new-lb" {
-  depends_on = [volterra_origin_pool.asingla-test-pool]
-  //Mandatory "Metadata"
-  name      = "asingla-http-new-lb"
-  //Name of the namespace where the origin pool must be deployed
-  namespace = "shape-cs"
-  //End of mandatory "Metadata" 
-  //Mandatory "Basic configuration" with Auto-Cert 
-  domains = ["juiceshop.asingla.life"]
-  default_route_pools {
-      pool {
-        name = "asingla-test-pool"
-        namespace = "shape-cs"
-      }
-      weight = 1
-    }
-  http {
-    port = 80
-   }
-  enable_malicious_user_detection = true
-  //Mandatory "VIP configuration"
-  advertise_on_public_default_vip = true
-  //End of mandatory "VIP configuration"
-  //Mandatory "Security configuration"
-  no_service_policies = true
-  //service_policies_from_namespace = true
-  no_challenge = true
-  disable_rate_limit = true
-  //WAAP Policy reference, created earlier in this plan - refer to the same name
-  app_firewall {
-    name = "asingla-waap-new"
-    namespace = "shape-cs"
-  }
-
-  enable_api_discovery {
-    enable_learn_from_redirect_traffic = true
-  }
-
-  enable_ip_reputation {
-    ip_threat_categories = ["SPAM_SOURCES"]
-  }
-
-  data_guard_rules {
-    metadata {
-      name    = "default-rule"
-      disable = false
-    }
-    apply_data_guard = true
-    any_domain       = true
-    path {
-      prefix = "/"
-    }
-  }
-  
-  multi_lb_app = true
-  user_id_client_ip = true
-  //End of mandatory "Security configuration"
-  //Mandatory "Load Balancing Control"
-  source_ip_stickiness = true
-  //End of mandatory "Load Balancing Control"
-  
-}
 
 //End of the file
 //==========================================================================
