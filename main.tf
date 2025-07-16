@@ -9,7 +9,7 @@ terraform {
           }
         }
         provider "volterra" {
-          api_p12_file = var.VES_P12_CONTENT
-          url = var.VES_tenant_url
-          
+          api_cert = var.VES_API_CERT
+          api_key = var.VES_API_KEY
+          url = var.VES_tenant_url    
         }
