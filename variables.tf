@@ -12,3 +12,13 @@ variable "VES_P12_PASSWORD" {
   type        = string
   sensitive   = true
 }
+variable "VES_API_CERT" {
+  description = "Base64 encoded content of the API Cert file."
+  type        = string
+  sensitive   = true
+}
+variable "VES_API_KEY" {
+  description = "Base64 encoded content of the API Key file."
+  type        = string
+  sensitive   = true
+}
