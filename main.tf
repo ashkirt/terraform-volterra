@@ -22,6 +22,11 @@ variable "VES_P12_PASSWORD" {
   sensitive   = true
 }
 
+variable "VES_tenant_url" {
+  description = "Tenant URL for Volterra provider"
+  type        = string
+}
+
 # Create P12 file from base64
 resource "local_file" "api_p12" {
   content_base64 = var.VES_API_P12_BASE64
