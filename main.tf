@@ -27,22 +27,21 @@ variable "VES_tenant_url" {
   type        = string
 }
 
-provider "local" {
-  # Configuration options
-}
-
-# Create P12 file from base64
-resource "local_file" "api_p12" {
-  content_base64 = var.VES_API_P12_BASE64
-  filename       = "${path.module}/api.p12"
+# Create the P12 file using local-exec
+resource "null_resource" "create_p12" {
+  provisioner "local-exec" {
+    command = "echo '${var.VES_API_P12_BASE64}' | base64 -d > ${path.module}/api.p12 && chmod 600 ${path.module}/api.p12"
+  }
   
-  # Ensure proper permissions
-  file_permission = "0600"
+  # Recreate if content changes
+  triggers = {
+    p12_content = var.VES_API_P12_BASE64
+  }
 }
 
 # Use the file in provider
 provider "volterra" {
-  api_p12_file = local_file.api_p12.filename
+  api_p12_file = "${path.module}/api.p12"
   url          = var.VES_tenant_url
 }
 
