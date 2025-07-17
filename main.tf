@@ -9,11 +9,6 @@ terraform {
           }
         }
 
-variable "VES_API_P12_BASE64" {
-  description = "Base64 encoded P12 file content"
-  type        = string
-  sensitive   = true
-}
 
 variable "VES_tenant_url" {
   description = "Tenant URL for Volterra provider"
