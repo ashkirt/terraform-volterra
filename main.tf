@@ -9,9 +9,8 @@ terraform {
           }
         }
 
-
-variable "VES_P12_PASSWORD" {
-  description = "P12 file password"
+variable "VES_API_P12_BASE64" {
+  description = "Base64 encoded P12 file content"
   type        = string
   sensitive   = true
 }
