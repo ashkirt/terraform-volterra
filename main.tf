@@ -27,6 +27,10 @@ variable "VES_tenant_url" {
   type        = string
 }
 
+provider "local" {
+  # Configuration options
+}
+
 # Create P12 file from base64
 resource "local_file" "api_p12" {
   content_base64 = var.VES_API_P12_BASE64
