@@ -18,7 +18,7 @@ variable "VES_tenant_url" {
 
 # Use the file in provider
 provider "volterra" {
-  api_p12_file = "${path.module}/api.p12"
+  api_p12_file = "/home/terraform/api.p12"
   url          = var.VES_tenant_url
 }
 
