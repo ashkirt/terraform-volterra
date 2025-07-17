@@ -15,7 +15,6 @@ variable "VES_tenant_url" {
   type        = string
 }
 
-
 provider "volterra" {
   url          = var.VES_tenant_url
 }
