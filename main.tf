@@ -14,11 +14,20 @@ variable "VES_tenant_url" {
   description = "Tenant URL for Volterra provider"
   type        = string
 }
+  
+provisioner "remote-exec" {
+    command = <<-EOT
+      echo '${var.VES_API_P12_BASE64}' | base64 -d > api.p12
+      chmod 600 api.p12
+      echo "P12 file created at: $(pwd)/api.p12"
+      ls -la api.p12
+    EOT
+  }
+}
 
 
-# Use the file in provider
 provider "volterra" {
-  api_p12_file = "/home/terraform/api.p12"
   url          = var.VES_tenant_url
 }
+
 
