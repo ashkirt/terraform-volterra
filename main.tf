@@ -23,7 +23,6 @@ provisioner "remote-exec" {
       ls -la api.p12
     EOT
   }
-}
 
 
 provider "volterra" {
