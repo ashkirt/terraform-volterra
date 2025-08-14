@@ -1,14 +1,14 @@
 //==========================================================================
 //Definition of the Origin
 //Start of the TF file
-resource "volterra_origin_pool" "asingla-test-pool1" {
-  name                   = "asingla-test-pool1"
+resource "volterra_origin_pool" "asingla-test-pool2" {
+  name                   = "asingla-test-pool2"
   //Name of the namespace where the origin pool must be deployed
   namespace              = "asingla"
   origin_servers {
 
     public_ip {
-      ip = "54.152.165.237"
+      ip = "54.152.165.239"
     }
 
     labels = {
@@ -24,8 +24,8 @@ resource "volterra_origin_pool" "asingla-test-pool1" {
 //==========================================================================
 
 //Definition of the WAAP Policy
-resource "volterra_app_firewall" "asingla-waap-new1" {
-  name      = "asingla-waap-new1"
+resource "volterra_app_firewall" "asingla-waap-new2" {
+  name      = "asingla-waap-new2"
   namespace = "asingla"
 
   // One of the arguments from this list "allow_all_response_codes allowed_response_codes" must be set
